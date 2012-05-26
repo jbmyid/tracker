@@ -1,0 +1,5 @@
+<h3>User Analytics</h3>
+<span >Username: </span> <span class="username_link"><%= @user.username %></span><br/>
+<span class="form_heading">Average Arrival Time: </span>
+<%= @user.avg_arrival_time %>
+<br>

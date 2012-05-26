@@ -1,0 +1,94 @@
+<div id="create_user_form_div" class="form_divs">
+<%= form_for @user, :url=>{:controller=>"tracker",:action=>"create_user"},:html=>{:onsubmit=>"return reset_form();"} do |f|%>
+<table>
+	<tr>
+	  <td align="center" colspan="2"><span class="form_heading">Create User</span></td>	
+	</tr>
+	<tr>
+	  <td><span>Username: </span></td>
+	  <td><%=f.text_field :username, :class=>"username_txt" %></td>		
+	</tr>
+	<tr>
+	  <td></td>
+	  <td><span class='errors'><%= @user.errors.blank? ? "" : @user.errors[:username][0].to_s %></span></td>		
+	</tr>
+	<tr>
+	  <td></td>
+	  <td ><%= f.submit "Create User" %></td>	
+	</tr>
+</table>
+  
+<% end %>
+</div>
+<div id="sign_in_form" class="form_divs">
+<%= form_for @sign_user, :url=>{:controller=>"tracker",:action=>"sign_in"} do |f|%>
+	
+<table>
+	<tr>
+	  <td align="center" colspan="2"> <span class="form_heading">Sign In</span><br></td>	
+	</tr>
+	<tr>
+	  <td><span>Username: </span></td>
+	  <td><%=f.text_field :username, :class=>"username_txt" %></td>		
+	</tr>
+	<tr>
+	  <td></td>
+	  <td>
+	     <span>&nbsp;</span>
+	  </td>		
+	</tr>
+	<tr>
+	  <td></td>
+	  <td ><%= f.submit "Sign In" %></td>	
+	</tr>
+</table>
+<% end %>
+</div>
+<%= link_to "Ananlytics", {:action=>:total_analytics}, :class=>"analytics_link" %>
+<div class="user_timing_grid_container">
+<span></span>
+<table>
+	<tr>
+	  <td width='60%'><span>Username</span></td>	
+	  <td width='20%'><span>Time</span></td>
+	  <td width='20%'><span>Date</span></td>
+	</tr>
+
+<% @all_timings.each do |time|%>
+	<tr is_data="true" class="<%= user_grid_class(time.entry_time)%>">
+	  <td ><%= link_to "#{time.user.username}", {:action=>:user_analytics, :id=>time.user_id}, :class=>"username_link" %></a></td>	
+	  <td><%= format_to_time(time.entry_time) %></td>
+	  <td><%= format_to_date(time.entry_time) %></td>
+	</tr>
+<% end %>
+</table>
+</div>
+
+<script type="text/javascript">
+
+var message = "<%= flash[:message].nil? ? "" : flash[:message] %>";
+if(message!="")
+{
+	alert(message);
+}
+$(".username_txt").val("Please enter username.").focus(function(){
+	if($(this).val()=="Please enter username.")
+	{
+	  $(this).val("");
+	}
+}).blur(function(){
+	if($(this).val()=="")
+	{
+	  $(this).val("Please enter username.");
+	}
+});
+
+function reset_form()
+{
+  	if($(".username_txt").val()=="Please enter username.")
+	{
+	  $(".username_txt").val("");
+	}
+	return false;
+}
+</script>

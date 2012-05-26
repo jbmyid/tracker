@@ -1,0 +1,113 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+*/
+span
+{
+  font-size: 14px;
+}
+.errors
+{
+ clear: both;
+    color: red;
+    display: block;
+    float: left;
+    font-size: 12px;
+    height: 15px;
+}
+.form_heading
+{
+  color: green;
+  font-size: 15px;
+}
+.form_divs
+{
+ display:block;
+ border: 1px solid grey;
+ float:left;
+ padding: 20px;
+ margin: 10px;
+}
+input[type='text']
+{
+ font-size: 14px;
+    font-weight: bold;
+    height: 20px;
+    padding-left: 10px;
+    width: 200px;
+    color: grey;
+}
+input[type='text']:focus
+{
+    font-size: 14px;
+    font-weight: bold;
+    height: 20px;
+    padding-left: 10px;
+    width: 200px;
+    color:black;
+}
+.user_timing_grid_container
+{
+  width: 500px;
+  margin:10px;
+  display:block;
+  float:left;
+  clear:both;
+}
+.username_link
+{
+  color: #FF8624;
+  font-size: 14px;
+  padding-left: 10px;
+  text-decoration:none;
+}
+.username_link:hover
+{
+  text-decoration:underline;
+}
+
+tr.late
+{
+  background-color :#F77281;
+}
+
+tr.late .username_link, tr.late td
+{
+ color: white;
+}
+.analytics_link
+{
+ color: #7A7977;
+ font-size: 16px;
+ display:block;
+ clear:both;
+ padding: 5px 10px;
+ text-align: center;
+ font-weight:bold;
+text-decoration:none;
+}
+.analytics_link:hover
+{
+ background-color :#FCDCA7;
+}
+.analytics_timing_grid_container
+{
+  width: 900px;
+}
+
+#total_analytics th
+{
+  font-size: 14px;
+  font-weight: bold;
+  color: #7A7977;
+  cursor: pointer;
+}

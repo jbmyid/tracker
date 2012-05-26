@@ -1,0 +1,47 @@
+class TrackerController < ApplicationController
+
+	def home
+	  @user = User.new
+    	  @sign_user = User.new
+          @all_timings = UserTiming.all
+	end
+
+   	def create_user
+	  @user = User.new(params[:user])
+	  @sign_user = User.new
+	  @all_timings = UserTiming.all
+	  if @user.save
+		flash[:message] = "User created successfuly."
+		redirect_to :action=>:home
+	  else
+		render :action=>:home
+	  end
+	end
+
+   	def sign_in
+	  @user = User.authenticate(params[:user][:username])
+	  if @user.nil? 
+  	    flash[:message] = "User does not exist."
+	  else
+ 	
+	    UserTiming.create(:user_id=>@user.id,:entry_time=>Time.now)
+	    flash[:message] = Time.now.hour>User::DEFAULT_TIME ? "You are late." :  "You have successfully signed in."
+	  end
+  	  redirect_to :action=> :home
+	end
+
+ 	def total_analytics
+	  username_order = (params[:user_order].nil? || params[:user_order]=="DESC") ? "ASC" : "DESC"
+	  @users = User.paginate(:page => params[:page], :per_page => 10).order("username #{username_order}")
+	  @user_time_arr = []
+	  @users.each do |u|
+		@user_time_arr <<{:username=>u.username,:late_marks=>u.late_arrival, :avg_arrival_time=>u.avg_arrival_time,:id=>u.id}
+	  end
+	 # this array was for sorting the recoreds by late marks and avg_arraval_time
+	  @avg_time = UserTiming.avg_time_of_arrival
+ 	end
+
+	def user_analytics
+	  @user = User.find_by_id(params[:id])
+	end
+end

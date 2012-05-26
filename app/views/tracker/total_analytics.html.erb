@@ -1,0 +1,37 @@
+<h3>Analytics</h3>
+<span class="form_heading">Average Arrival Time: </span>
+<%= @avg_time if @avg_time%>
+<br>
+<div class="analytics_timing_grid_container .user_timing_grid_container">
+<span></span>
+<table id="total_analytics">
+<thead> 
+<tr> 
+    <th align="left" width='50%'>Usernames</th> 
+    <th align="left" width='20%'>Late arrival</th> 
+    <th align="center" width='30%'>Average Arrival Time</th> 
+</tr> 
+</thead> 
+<tbody> 
+
+<% @users.each do |user|%>
+	<tr is_data="true">
+	  <td ><%= link_to "#{user[:username]}", {:action=>:user_analytics, :id=>user[:id]}, :class=>"username_link" %></a></td>	
+	  <td><%= user.late_arrival %></td>
+	  <td><%= user.avg_arrival_time %></td>
+	</tr>
+<% end %>
+
+</tbody> 
+</table>
+</div>
+<%= will_paginate @users %>
+
+<script type="text/javascript">
+$(document).ready(function() 
+    { 
+        $("#total_analytics").tablesorter(); 
+    } 
+); 
+</script>
+

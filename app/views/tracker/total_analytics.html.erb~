@@ -1,0 +1,24 @@
+<h3>Analytics</h3>
+<span class="form_heading">Average Arrival Time: </span>
+<%= @avg_time if @avg_time%>
+<br>
+<div class="analytics_timing_grid_container .user_timing_grid_container">
+<span></span>
+<table>
+	<tr>
+	<% order = (params[:user_order].nil? || params[:user_order]=="DESC") ? "ASC" : "DESC" %>
+	  <td width='50%'><span><%= link_to "Usernames", {:action=>:total_analytics, :user_order=>order} %></span></td>	
+	  <td width='20%'><span>Late arrival</span></td>
+	  <td width='30%'><span>Average Arrival Time</span></td>
+	</tr>
+
+<% @user_time_arr.each do |user|%>
+	<tr is_data="true">
+	  <td ><%= link_to "#{user[:username]}", {:action=>:user_analytics, :id=>user[:id]}, :class=>"username_link" %></a></td>	
+	  <td><%= user[:late_marks] %></td>
+	  <td><%= user[:avg_arrival_time] %></td>
+	</tr>
+<% end %>
+</table>
+</div>
+<%= will_paginate @users %>

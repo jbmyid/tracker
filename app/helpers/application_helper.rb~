@@ -1,0 +1,15 @@
+module ApplicationHelper
+
+ def user_grid_class(time)
+   time.hour>User::DEFAULT_TIME ? "late" : "normal"
+ end
+
+ def format_to_time(time)
+	time = time.to_f
+    Time.at(time).strftime("%I:%M %p")
+ end
+ 
+ def format_to_date(time)
+    time.strftime("%d-%m-%Y")
+ end
+end

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tracker</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+<span style="clear:both;display:block;float:left">
+<%= link_to "Home Page", {:controller=>"tracker", :action=>"home"}%>
+</span>
+</body>
+</html>
